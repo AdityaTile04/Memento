@@ -1,13 +1,13 @@
-package com.project.memento;
+package com.project.backend;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class MementoApplication {
+public class BackendApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run( MementoApplication.class, args );
+        SpringApplication.run( BackendApplication.class, args );
         System.out.println("Application started");
     }
 

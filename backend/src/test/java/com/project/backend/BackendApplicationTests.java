@@ -1,10 +1,10 @@
-package com.project.memento;
+package com.project.backend;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class MementoApplicationTests {
+class BackendApplicationTests {
 
     @Test
     void contextLoads() {
