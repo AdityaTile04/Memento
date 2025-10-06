@@ -7,5 +7,5 @@ public interface TaskListMapper {
 
     TaskList fromDto(TaskListDTO taskListDTO);
 
-   TaskListDTO toDo(TaskList taskList);
+   TaskListDTO toDto(TaskList taskList);
 }

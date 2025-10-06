@@ -36,7 +36,7 @@ public class TaskListMapperImpl implements TaskListMapper {
     }
 
     @Override
-    public TaskListDTO toDo(TaskList taskList) {
+    public TaskListDTO toDto(TaskList taskList) {
         return new TaskListDTO(
                 taskList.getId(),
                 taskList.getTitle(),
