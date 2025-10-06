@@ -1,12 +1,10 @@
 package com.project.backend.controllers;
 
 import com.project.backend.dto.TaskListDTO;
+import com.project.backend.entity.TaskList;
 import com.project.backend.mappers.TaskListMapper;
 import com.project.backend.services.TaskListService;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,6 +27,14 @@ public class TaskListController {
                 .stream()
                 .map( taskListMapper::toDto )
                 .toList();
+    }
+
+    @PostMapping
+    public TaskListDTO addTaskList(@RequestBody TaskListDTO taskListDTO) {
+        TaskList createdTaskList = taskListService.createTaskList(
+                taskListMapper.fromDto( taskListDTO )
+        );
+        return taskListMapper.toDto( createdTaskList );
     }
 
 
