@@ -1,6 +1,7 @@
 package com.project.backend.controllers;
 
 import com.project.backend.dto.TaskDTO;
+import com.project.backend.entity.Task;
 import com.project.backend.mappers.TaskMapper;
 import com.project.backend.services.TaskService;
 import org.springframework.web.bind.annotation.*;
@@ -26,6 +27,14 @@ public class TasksController {
                 .stream()
                 .map( taskMapper::toDto )
                 .toList();
+    }
+
+    @PostMapping
+    public TaskDTO createTask(@RequestBody TaskDTO taskDTO, @PathVariable UUID task_list_id) {
+        Task createdTask = taskService
+                .createTask( task_list_id, taskMapper.fromDto( taskDTO ) );
+
+        return taskMapper.toDto( createdTask );
     }
 
 }
