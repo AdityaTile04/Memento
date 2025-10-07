@@ -3,6 +3,7 @@ package com.project.backend.services.impl;
 import com.project.backend.entity.TaskList;
 import com.project.backend.repository.TaskListRepo;
 import com.project.backend.services.TaskListService;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -51,6 +52,7 @@ public class TaskListServiceImpl implements TaskListService {
         return taskListRepo.findById( id );
     }
 
+    @Transactional
     @Override
     public TaskList updateTaskList(UUID id, TaskList taskList) {
         if(null == taskList.getId()) {
@@ -70,6 +72,7 @@ public class TaskListServiceImpl implements TaskListService {
         return taskListRepo.save( existingTaskList );
     }
 
+    @Transactional
     @Override
     public void deleteTaskList(UUID id) {
         taskListRepo.deleteById( id );
