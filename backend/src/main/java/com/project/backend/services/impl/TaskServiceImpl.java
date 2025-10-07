@@ -63,4 +63,9 @@ public class TaskServiceImpl implements TaskService {
 
         return taskRepo.save( saveTask );
     }
+
+    @Override
+    public Optional<Task> getTask(UUID taskListId, UUID taskId) {
+        return taskRepo.findByTaskListIdAndId( taskListId, taskId );
+    }
 }
