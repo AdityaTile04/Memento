@@ -1,8 +1,41 @@
+version: "3.9"
+
 services:
   db:
     image: postgres:latest
+    container_name: postgres-db
     ports:
       - "5432:5432"
     restart: always
     environment:
+      POSTGRES_USER: postgres
       POSTGRES_PASSWORD: aditya
+      POSTGRES_DB: Memento
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build: ./backend
+    container_name: memento-backend
+    ports:
+      - "8080:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/Memento
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: aditya
+      SERVER_PORT: 8080
+    depends_on:
+      - db
+
+  frontend:
+    build: ./frontend
+    container_name: memento-frontend
+    ports:
+      - "5173:5173"
+    environment:
+      VITE_API_BASE_URL: http://backend:8080
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:
