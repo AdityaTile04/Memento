@@ -19,31 +19,17 @@ jobs:
           java-version: '22'
           distribution: 'temurin'
 
-      - name: Cache Maven dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.m2/repository
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
-
       - name: Build backend JAR
         run: |
           cd backend
           mvn clean package -DskipTests
-
-      - name: Build frontend
-        run: |
-          cd frontend
-          npm ci
-          npm run build
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
 
       - name: Build and run Docker Compose
         run: |
-          docker compose -f docker-compose.yml up -d --build --remove-orphans
+          docker compose -f docker-compose.yml up -d --build
 
       - name: Wait for backend to be ready
         run: |
@@ -64,5 +50,4 @@ jobs:
         run: docker ps -a
 
       - name: Stop containers
-        if: always()
         run: docker compose down
